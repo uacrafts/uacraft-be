@@ -18,7 +18,7 @@ import environ
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
-environ.Env.read_env(os.path.dirname(BASE_DIR))
+environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "graphene_django",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
     "onlinestore",
     "users",
 ]
+
+GRAPHENE = {"SCHEMA": "backend.schema.schema"}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
