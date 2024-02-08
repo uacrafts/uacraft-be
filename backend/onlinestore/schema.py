@@ -1,13 +1,14 @@
 import graphene
 
 from graphene_django.types import DjangoObjectType, ObjectType
-from onlinestore.models import CallBack
+from .models import CallBack
 
 
 # Create a GraphQL type for the callback model
 class CallBackType(DjangoObjectType):
     class Meta:
         model = CallBack
+        fields = '__all__'
 
 
 # Create a Query type
@@ -17,10 +18,8 @@ class Query(ObjectType):
 
     def resolve_callback(self, info, **kwargs):
         id = kwargs.get("id")
-
         if id is not None:
-            return CallBack.objects.get(pk=id)
-
+            return CallBack.objects.filter(pk=id).first()
         return None
 
     def resolve_callbacks(self, info, **kwargs):
