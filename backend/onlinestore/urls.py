@@ -4,5 +4,5 @@ from . import views
 app_name = "onlinestore"
 
 urlpatterns = [
-    path("", views.main, name="main"),
+    path("uacraft-be.vercel.app/", views.main, name="main"),
 ]
