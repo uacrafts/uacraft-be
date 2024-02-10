@@ -38,15 +38,15 @@ class CreateCallBack(graphene.Mutation):
     class Arguments:
         input = CallBackInput(required=True)
 
-    ok = graphene.Boolean()
+    status = graphene.Boolean()
     callback = graphene.Field(CallBackType)
 
     @staticmethod
     def mutate(root, info, input=None):
-        ok = True
+        status = True
         callback_instance = CallBack(name=input.name, phone=input.phone)
         callback_instance.save()
-        return CreateCallBack(ok=ok, callback=callback_instance)
+        return CreateCallBack(status=status, callback=callback_instance)
 
 
 class Mutation(graphene.ObjectType):
