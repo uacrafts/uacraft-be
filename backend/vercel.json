@@ -13,7 +13,7 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
       "src": "/static/(.*)",
       "dest": "/static/$1"
