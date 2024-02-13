@@ -19,7 +19,7 @@
       "destination": "/static/$1"
     },
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "destination": "backend/wsgi.py"
     }
   ],
