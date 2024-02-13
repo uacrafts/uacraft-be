@@ -13,14 +13,19 @@
       }
     }
   ],
-  "headers": [
+  "rewrites": [
     {
       "source": "/static/(.*)",
       "destination": "/static/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "backend/wsgi.py",
+      "destination": "backend/wsgi.py"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
