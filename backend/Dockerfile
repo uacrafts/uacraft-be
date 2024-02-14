@@ -22,4 +22,4 @@ COPY backend backend
 
 EXPOSE ${PORT}
 
-CMD gunicorn --bind :${PORT} --workers 2 backend.backend.wsgi
+CMD gunicorn --bind :${PORT} --workers 2 backend.wsgi
