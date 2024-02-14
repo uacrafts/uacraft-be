@@ -6,11 +6,13 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 
 application = get_wsgi_application()
 
-class handler(BaseHTTPRequestHandler):
+app = application
 
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
-        self.end_headers()
-        self.wfile.write('Hello, world!'.encode('utf-8'))
-        return
+#class handler(BaseHTTPRequestHandler):
+#
+#    def do_GET(self):
+#        self.send_response(200)
+#        self.send_header('Content-type', 'text/plain')
+#        self.end_headers()
+#        self.wfile.write('Hello, world!'.encode('utf-8'))
+#        return
