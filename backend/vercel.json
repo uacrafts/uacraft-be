@@ -23,11 +23,11 @@
     },
     {
       "source": "/graphql/",
-      "destination": "/backend/wsgi.py"
+      "destination": "/api/index"
     },
     {
       "source": "/(.*)",
-      "destination": "/backend/wsgi.py"
+      "destination": "/api/index"
     }
   ],
   "headers": [
