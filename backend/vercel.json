@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "/api/index",
+      "src": "/api/index.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
@@ -23,11 +23,11 @@
     },
     {
       "source": "/graphql/",
-      "destination": "/api/index"
+      "destination": "/api/index.py"
     },
     {
       "source": "/(.*)",
-      "destination": "/api/index"
+      "destination": "/api/index.py"
     }
   ],
   "headers": [
