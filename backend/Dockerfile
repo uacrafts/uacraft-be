@@ -7,6 +7,7 @@ ENV VIRTUAL_ENV=/app/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+RUN python manage.py migrate
 
 
 FROM python:3.10 AS runner
