@@ -21,4 +21,7 @@ COPY --from=builder /app/venv venv
 COPY backend backend
 
 EXPOSE ${PORT}
+
+RUN python manage.py migrate
+
 CMD gunicorn --bind :${PORT} --workers 2 backend.wsgi
