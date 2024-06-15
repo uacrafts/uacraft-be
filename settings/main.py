@@ -6,7 +6,9 @@ INSTALLED_APPS += [
     'rest_framework',
     'drf_spectacular',
     'drf_spectacular_sidecar',
+    'rest_framework.authtoken',
     'django_extensions',
+    'anymail',
 
     # custom apps
     'apps.users.apps.UsersConfig',
@@ -61,8 +63,6 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
     'PAGE_SIZE': 10,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -72,15 +72,44 @@ REST_FRAMEWORK = {
 # SPECTACULAR
 # https://drf-spectacular.readthedocs.io/en/latest/readme.html
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Sears Scraper API',
-    'DESCRIPTION': 'DRF CraftLand',
+    'TITLE': 'Craft Land API',
+    'DESCRIPTION': 'DRF Craft Land',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 
     'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     'REDOC_DIST': 'SIDECAR',
+    'CONTACT': {
+        'name': 'Stanislav',
+        'LinkedIn': 'https://www.linkedin.com/in/stanislav-nikitenko/',
+        'telegram': 'https://t.me/F_redy'
+    },
 }
+
+DEVELOPMENT_ENVIRONMENT = 'development'
+PRODUCTION_ENVIRONMENT = 'production'
+
+ENVIRONMENT = env('ENVIRONMENT')
+
+# Django-Anymail
+# https://anymail.dev/en/stable/installation/
+
+ANYMAIL = {
+    'MAILGUN_API_KEY': '<your Mailgun key>',
+}
+
+if ENVIRONMENT == DEVELOPMENT_ENVIRONMENT:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    # Выбрать сервис для отправки email на production
+    EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'example@example.com'
+SERVER_EMAIL = 'example-server@example.com'
+
+FRONTEND_HOST = env('FRONTEND_HOST', default='http://localhost:8000/')
+FRONTEND_CONFIRM_EMAIL_PATH = env('FRONTEND_CONFIRM_EMAIL_PATH', default='/confirm-email/{uid}/{token}')
 
 AUTH_USER_MODEL = 'users.User'
 
