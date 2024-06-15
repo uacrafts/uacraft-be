@@ -21,12 +21,14 @@
       ```
     - Fill in the actual values for your local setup in the `.env` file.
 4. Install packages:
+
+   **Important** 
+      `Create in project virtualenv!`
+
+   - Use [Poetry](https://python-poetry.org/docs/#installation)
    
-   - Use Poetry
-   ```bash
-   poetry install
-   ```
-   or
+     or
+   
    - Pip
    ```bash
    pip install -r requirements/development.txt
