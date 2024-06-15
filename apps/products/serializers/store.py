@@ -7,7 +7,7 @@ class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = (
-            'pk',
+            'id',
             'title',
             'city',
             'is_displayed',
