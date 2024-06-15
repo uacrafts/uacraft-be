@@ -20,9 +20,20 @@ class User(PermissionsMixin, AbstractBaseUser):
         max_length=150,
         help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
         validators=[username_validator],
-        error_messages={
-            'unique': _('A user with that username already exists.'),
-        },
+    )
+    first_name = models.CharField(
+        _('first name'),
+        max_length=150,
+        help_text=_('Required. 150 characters or fewer.'),
+        blank=True,
+        null=True,
+    )
+    last_name = models.CharField(
+        _('last name'),
+        max_length=150,
+        help_text=_('Required. 150 characters or fewer.'),
+        blank=True,
+        null=True,
     )
     email = models.EmailField(_('email address'), unique=True)
     is_email_verified = models.BooleanField(
@@ -48,9 +59,16 @@ class User(PermissionsMixin, AbstractBaseUser):
     objects = UserManager()
 
     class Meta:
-        verbose_name = _('Користувача')
+        verbose_name = _('Користувач')
         verbose_name_plural = _('Користувачі')
 
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
+
+    def get_full_name(self):
+        """
+        Return the first_name plus the last_name, with a space in between.
+        """
+        full_name = "%s %s" % (self.first_name, self.last_name)
+        return full_name.strip()
