@@ -7,7 +7,7 @@ class PriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Price
         fields = (
-            'pk',
+            'id',
             'regular_price',
             'special_price',
             'discount_percentage',
