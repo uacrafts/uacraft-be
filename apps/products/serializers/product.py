@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from apps.products.models import Product
@@ -17,7 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'pk',
+            'id',
             'title',
             'store',
             'price',
@@ -32,27 +33,32 @@ class ProductSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('created_at', 'updated_at', 'image_url')
 
-    def get_store(self, obj):
-        if hasattr(obj, 'store'):
-            return StoreSerializer(obj.store).data
+    @extend_schema_field(StoreSerializer)
+    def get_store(self, product: Product):
+        if product.store:
+            return StoreSerializer(product.store).data
         return None
 
-    def get_price(self, obj):
-        if hasattr(obj, 'price'):
-            return PriceSerializer(obj.price).data
+    @extend_schema_field(PriceSerializer)
+    def get_price(self, product: Product):
+        if product.price:
+            return PriceSerializer(product.price).data
         return None
 
-    def get_brand(self, obj):
-        if hasattr(obj, 'brand'):
-            return BrandSerializer(obj.brand).data
+    @extend_schema_field(BrandSerializer)
+    def get_brand(self, product: Product):
+        if product.brand:
+            return BrandSerializer(product.brand).data
         return None
 
-    def get_category(self, obj):
-        if hasattr(obj, 'category'):
-            return CategorySerializer(obj.category).data
+    @extend_schema_field(CategorySerializer)
+    def get_category(self, product: Product):
+        if product.category:
+            return CategorySerializer(product.category).data
         return None
 
-    def get_image_url(self, obj):
-        if hasattr(obj, 'image'):
-            return self.context['request'].build_absolute_uri(obj.image.url)
+    @extend_schema_field(serializers.CharField)
+    def get_image_url(self, product: Product):
+        if product.image:
+            return self.context['request'].build_absolute_uri(product.image.url)
         return None
