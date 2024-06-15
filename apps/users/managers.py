@@ -21,10 +21,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, username, password=None, **extra_fields):
+    def create_user(self, email, username, password=None, first_name='', last_name='', **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_email_verified', False)
+        extra_fields.setdefault('first_name', first_name)
+        extra_fields.setdefault('last_name', last_name)
         return self._create_user(email, username, password, **extra_fields)
 
     def create_superuser(self, email, username, password, **extra_fields):
