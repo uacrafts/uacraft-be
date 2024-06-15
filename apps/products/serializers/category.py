@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from apps.products.models import Category
@@ -9,7 +10,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            'pk',
+            'id',
             'title',
             'slug',
             'parent',
@@ -18,7 +19,8 @@ class CategorySerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('slug', 'created_at', 'updated_at')
 
-    def get_parent(self, obj):
-        if obj.parent:
-            return CategorySerializer(obj.parent).data
+    @staticmethod
+    def get_parent(category: Category) -> 'CategorySerializer':
+        if category.parent:
+            return CategorySerializer(category.parent).data
         return None
