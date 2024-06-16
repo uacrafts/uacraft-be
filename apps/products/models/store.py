@@ -9,7 +9,7 @@ class Store(TimestampMixin, models.Model):
         DEACTIVATE = 0, _('Деактивовано')
         ACTIVE = 1, _('Активовано')
 
-    title = models.CharField(_('Назва магазину'), max_length=255, db_index=True)
+    title = models.CharField(_('Назва магазину'), max_length=255, unique=True, db_index=True)
     city = models.CharField(_('Місто'), max_length=255)
     is_displayed = models.BooleanField(
         choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)),
@@ -25,4 +25,3 @@ class Store(TimestampMixin, models.Model):
         db_table = 'product_store'
         verbose_name = _('Магазин')
         verbose_name_plural = _('Магазини')
-        unique_together = ('title',)
