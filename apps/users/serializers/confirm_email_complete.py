@@ -15,7 +15,7 @@ class ConfirmEmailSerializer(serializers.Serializer):
     uid = serializers.CharField(required=True)
     token = serializers.CharField(required=True)
 
-    def validate(self, attrs):
+    def validate(self, attrs: dict) -> dict:
         uid = attrs['uid']
         token = attrs['token']
 
@@ -43,7 +43,7 @@ class ConfirmEmailSerializer(serializers.Serializer):
         attrs['user'] = user
         return attrs
 
-    def create(self, validated_data):
+    def create(self, validated_data: dict) -> User:
         user = validated_data['user']
         user.is_email_verified = True
         user.save(update_fields=['is_email_verified'])
