@@ -4,6 +4,12 @@ from rest_framework import serializers
 from apps.products.models import Category
 
 
+class ParentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'title', 'slug', 'created_at', 'updated_at')
+
+
 class CategorySerializer(serializers.ModelSerializer):
     parent = serializers.SerializerMethodField()
 
@@ -19,8 +25,8 @@ class CategorySerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('slug', 'created_at', 'updated_at')
 
-    @staticmethod
-    def get_parent(category: Category) -> 'CategorySerializer':
+    @extend_schema_field(ParentSerializer)
+    def get_parent(self, category: Category) -> dict[str, any] | None:
         if category.parent:
-            return CategorySerializer(category.parent).data
+            return ParentSerializer(category.parent).data
         return None
