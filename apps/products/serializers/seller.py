@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from apps.products.models import Store
+from apps.products.models import Seller
 
 
-class StoreSerializer(serializers.ModelSerializer):
+class SellerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Store
+        model = Seller
         fields = (
             'id',
             'title',
