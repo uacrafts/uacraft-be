@@ -36,8 +36,13 @@ class Product(TimestampMixin, models.Model):
         related_name='category_products',
         verbose_name=_('Категорії'),
     )
-    image = models.ImageField(_('Фото товару'), upload_to='product_photo/', null=True, blank=True)
-    description = models.TextField(verbose_name=_('Опис товару'), null=True, blank=True)
+    images = models.ManyToManyField(
+        to='ProductImage',
+        related_name='product_images',
+        blank=True,
+        verbose_name=_('Фото товару'),
+    )
+    description = models.TextField(verbose_name=_('Опис товару'), blank=True)
     is_stock = models.BooleanField(_('Наявність'))
 
     def __str__(self):
