@@ -17,7 +17,7 @@ class Category(TimestampMixin, models.Model):
         related_name='children',
         verbose_name=_('Батьківська категорія')
     )
-    slug = models.SlugField(max_length=100, unique=True, db_index=True)
+    slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
         return self.title
@@ -29,6 +29,6 @@ class Category(TimestampMixin, models.Model):
 
     class Meta:
         db_table = 'product_category'
-        verbose_name = _('Категорію')
+        verbose_name = _('Категорія')
         verbose_name_plural = _('Категорії')
         ordering = ('title',)
