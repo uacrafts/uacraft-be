@@ -17,7 +17,7 @@ class Category(TimestampMixin, models.Model):
         related_name='children',
         verbose_name=_('Батьківська категорія')
     )
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=150, unique=True)
 
     def __str__(self):
         return self.title
