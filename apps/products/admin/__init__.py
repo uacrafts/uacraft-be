@@ -3,4 +3,4 @@ from apps.products.admin.category import CategoryAdmin
 from apps.products.admin.price import PriceAdmin
 from apps.products.admin.product import ProductAdmin
 from apps.products.admin.product_image import ProductImageAdmin
-from apps.products.admin.store import StoreAdmin
+from apps.products.admin.seller import SellerAdmin
