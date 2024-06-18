@@ -13,6 +13,7 @@ class Brand(TimestampMixin, models.Model):
         unique=True,
         default=NO_BRAND
     )
+    logo = models.ImageField(_('Логотип бренду'), upload_to='logos/')
 
     def __str__(self):
         return self.title
