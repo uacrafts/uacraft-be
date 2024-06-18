@@ -17,5 +17,5 @@ class Price(models.Model):
 
     class Meta:
         db_table = 'product_price'
-        verbose_name = _('Ціну')
+        verbose_name = _('Ціна')
         verbose_name_plural = _('Ціни')
