@@ -6,7 +6,7 @@ class ProductImage(models.Model):
     product = models.ForeignKey(
         to='Product',
         on_delete=models.CASCADE,
-        related_name='prod_images'
+        related_name='product_images'
     )
     image = models.ImageField(_('Фото'), upload_to='products/')
 
