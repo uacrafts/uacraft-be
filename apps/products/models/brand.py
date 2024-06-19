@@ -14,6 +14,7 @@ class Brand(TimestampMixin, models.Model):
         default=NO_BRAND
     )
     logo = models.ImageField(_('Логотип бренду'), upload_to='logos/')
+    description = models.TextField(verbose_name=_('Опис бренду'), blank=True)
 
     def __str__(self):
         return self.title

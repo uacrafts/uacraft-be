@@ -10,6 +10,7 @@ class BrandSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'logo',
+            'description',
             'created_at',
             'updated_at'
         )
