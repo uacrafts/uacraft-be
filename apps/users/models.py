@@ -41,6 +41,11 @@ class User(PermissionsMixin, AbstractBaseUser):
         default=False,
         help_text=_('Вказує, чи підтвердив користувач свою електронну адресу.')
     )
+    is_seller = models.BooleanField(
+        _('Продавець'),
+        default=False,
+        help_text=_('Визначає, чи є користувач продавцем.'),
+    )
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
