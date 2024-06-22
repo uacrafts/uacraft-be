@@ -44,15 +44,9 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
-CORS_ALLOWED_ORIGINS = [
-    'https://craft-land-top-student-4ee3c794.koyeb.app',
-    'https://drf-on-koyeb.craft-land.koyeb',
-]
+CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS', default='http://localhost:8000').split()
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://craft-land-top-student-4ee3c794.koyeb.app',
-    'https://drf-on-koyeb.craft-land.koyeb',
-]
+CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS', default='http://localhost:8000').split()
 
 # DRF
 # https://www.django-rest-framework.org/
@@ -63,6 +57,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'PAGE_SIZE': 10,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
