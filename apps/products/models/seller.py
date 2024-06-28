@@ -30,6 +30,6 @@ class Seller(TimestampMixin, models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        db_table = 'product_store'
+        db_table = 'product_seller'
         verbose_name = _('Продавець')
         verbose_name_plural = _('Продавці')
