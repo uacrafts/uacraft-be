@@ -66,6 +66,6 @@ class ProductAPIViewSet(
     mixins.DestroyModelMixin,
     GenericViewSet
 ):
-    queryset = Product.objects.all().select_related('brand', 'store', 'price', 'category')
+    queryset = Product.objects.all().select_related('brand', 'seller', 'price', 'category')
     serializer_class = ProductSerializer
     permission_classes = (ReadOnlyAdminModifyPermission,)
